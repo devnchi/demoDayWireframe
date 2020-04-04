@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+}
+body {
+
+}
+body li {
+  list-style-type: none;
+  float: left;
+  margin: 3%;
+}
+nav {
+  text-align: center;
+  align-content: center;
+}
+nav section {
+  float: left;
+  width: 33.3333%;
+}
+header {
+  width: 100%;
+  height: 60px;
+}
+.leftColumn {
+  color: black;
+}
+.container {
+  margin-top: 5%;
+}

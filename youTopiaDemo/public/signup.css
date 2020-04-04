@@ -1,0 +1,12 @@
+body{
+  background-image: url("./images/spaceTravel2.gif");
+  background-size: cover;
+  background-color: black;
+  font-family: 'Paytone One', sans-serif;
+  color: white;
+}
+.container {
+  background-color: purple;
+  margin: 200px auto;
+  width: 40%;
+}
