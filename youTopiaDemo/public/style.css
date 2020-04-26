@@ -1,20 +1,26 @@
 body{
-  background-color: black;
+  padding: 2%;
+  background-color: rgb(155, 0, 139);
+  background-image: url("./images/coverUFO.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
   text-align: center;
-  align-content: center;
-  background-size: cover;
-  font-family: 'Paytone One', sans-serif;
+  font-family: 'Do Hyeon', sans-serif;
+  color: rgb(142, 243, 189);
 }
 h1 {
-  font-size: 50px;
-  font-family: 'Paytone One', sans-serif;
+  margin-top: 41.5%;
+  font-size: 125px;
+  font-weight: bolder;
+  font-family: 'Do Hyeon', sans-serif;
 }
-.container div {
-  background-color: purple;
-  width: 50%;
-  padding: 3%;
-  margin: 50px auto;
-  color: white;
+.logoAndSlogan {
+  width: 100%;
+  font-size: 30px;
+}
+.buttonDiv {
+  color: rgb(142, 243, 189);
+  background-color: rgb(155, 0, 139);
 }
 .hide{
   display: none;

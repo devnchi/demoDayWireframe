@@ -1,5 +1,4 @@
 var heartLike = document.getElementsByClassName("fas fa-heart");
-var trash = document.getElementsByClassName("fa fa-trash");
 var search = document.getElementById("searchBox");
 var sendSearch = document.getElementById("sendSearch");
 
@@ -40,32 +39,3 @@ Array.from(heartLike).forEach(function(element) {
         })
       });
 });
-
-
-Array.from(trash).forEach(function(element) {
-      element.addEventListener('click', function(){
-        const username = this.parentNode.parentNode.childNodes[1].innerText
-        const msg = this.parentNode.parentNode.childNodes[3].innerText
-        fetch('posts', {
-          method: 'delete',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            'username': username,
-            'msg': msg
-          })
-        }).then(function (response) {
-          window.location.reload(true)
-        })
-      });
-});
-
-
-
-
-
-
-// let usern = document.createElement('h2');
-// actualWord.innerText = word.value;
-// document.querySelector('#typeAndDef').appendChild(actualWord);

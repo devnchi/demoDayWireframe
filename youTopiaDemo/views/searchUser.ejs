@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Audiowide|Bowlby+One|Bowlby+One+SC|Denk+One|Modak|Muli|Quantico|Ranchers|Roboto|Rubik+Mono+One|Staatliches&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Aldrich|Anton|Bangers|Bowlby+One+SC|Do+Hyeon|Orbitron|Oswald|Press+Start+2P|Quantico|Roboto+Mono|Rubik+Mono+One|Russo+One|Staatliches|VT323&display=swap" rel="stylesheet">
+    <title>Add Comrades</title>
+    <link rel="stylesheet" href="/settings.css">
+  </head>
+  <body>
+    <section class="containerSec">
+      <section class="userBox">
+        <section>
+          <img src="/<%= user.local.avatar %>" alt="">
+        </section>
+        <section>
+          <p id="searchedUser">@<%= user.local.username %></p>
+        </section>
+        <section>
+          <button class="makePurple" id="add" type="submit" name="button">ADD COMRADE</button>
+          <button class="makePurple" id="delete" type="submit" name="button">DELETE COMRADE</button>
+        </section>
+      </section>
+    </section>
+    <script src="../searchUser.js" type="text/javascript"></script>
+  </body>
+</html>

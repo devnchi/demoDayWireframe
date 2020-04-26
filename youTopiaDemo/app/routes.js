@@ -1,5 +1,15 @@
-module.exports = function(app, passport, db) {
-  var ObjectID = require('mongodb').ObjectID
+module.exports = function(app, passport, db, multer, ObjectId) {
+
+// Image Upload Code =========================================================================
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'public/images/avatars')
+    },
+    filename: (req, file, cb) => {
+      cb(null, file.fieldname + '-' + Date.now() + ".png")
+    }
+});
+var upload = multer({storage: storage});
 
 // normal routes ===============================================================
 
@@ -8,23 +18,113 @@ module.exports = function(app, passport, db) {
         res.render('index.ejs');
     });
 
-    // FEED SECTION
-    app.get('/feed', function(req, res) {
-      // console.log(req.user._id);
-
-      db.collection('messages').find().toArray((err, result) => {
-        if (err) return console.log(err)
-        res.render('feed.ejs', {
-          user : req.user
+    // PROFILE SECTION =========================
+    app.get('/profile', isLoggedIn, function(req, res) {
+      var myUserId = ObjectId(req.session.passport.user)
+      console.log(req.user._id);
+      db.collection('users').findOne({"_id": myUserId}, (err1, result1) => {
+        if (err1) return console.log(err1)
+        db.collection('posts').find({userId: req.user._id.toString()} ).toArray((err, result) => {
+          console.log(result);
+          if (err) return console.log(err)
+          res.render('profile.ejs', {
+            user : result1,
+            posts: result
+          })
         })
       })
     });
+
+    // PROFILE SETTINGS SECTION =========================
+    app.get('/settings', isLoggedIn, function(req, res) {
+      var myUserId = ObjectId(req.session.passport.user)
+      console.log(req.user._id);
+        db.collection('users').findOne({"_id": myUserId}, (err, result) => {
+          console.log(result);
+          if (err) return console.log(err)
+          res.render('settings.ejs', {
+            user : result
+          })
+        })
+    });
+
+    app.post('/uploadAvatar', isLoggedIn, upload.single('file-to-upload'), (req, res, next) => {
+      var myUserId = ObjectId(req.session.passport.user)
+      db.collection('users').findOneAndUpdate({"_id": myUserId}, {
+        $set: {
+          "local.avatar" : 'images/avatars/' + req.file.filename
+        }
+      }, (err, result) => {
+        if (err) return res.send(err)
+        res.redirect('/settings')
+      })
+    });
+
+    app.put('/updateProfile', (req, res) => {
+      var myUserId = ObjectId(req.session.passport.user)
+      db.collection('users').findOneAndUpdate({"_id": myUserId}, {
+        $set: {
+          "local.about" : req.body.about,
+          "local.location" : req.body.location
+        }
+      }, (err, result) => {
+        if (err) return res.send(err)
+        res.send(result)
+      })
+    });
+
+    app.put('/posts', (req, res) => {
+      var myUserId = ObjectId(req.session.passport.user)
+      db.collection('posts')
+      .findOneAndUpdate({username: req.body.username, msg: req.body.msg}, {
+        $set: {
+          heartLike: req.body.heartLike + 1
+        }
+      }, {
+        sort: {_id: -1},
+        upsert: false
+      }, (err, result) => {
+        if (err) return res.send(err)
+        res.send(result)
+      })
+    })
+
+    // FEED SECTION
+    app.get('/feed', isLoggedIn, function(req, res) {
+      var myUserId = ObjectId(req.session.passport.user)
+      var feed = "feed"
+      db.collection('users').find({
+        "_id": myUserId
+      }).toArray((err, user) => {
+        db.collection('posts').find({
+          "location": feed
+        }).toArray((err, posts) => {
+          if (err) return console.log(err)
+          res.render('feed.ejs', {
+            user: user[0],
+            posts: posts
+          })
+        })
+      })
+    });
+
+
+    // app.get('/searchUser', function(req, res) {
+    //   // console.log(req.user._id);
+    //
+    //   db.collection('users').find().toArray((err, result) => {
+    //     if (err) return console.log(err)
+    //     res.render('searchUser.ejs', {
+    //       user : req.user
+    //     })
+    //   })
+    // });
 
     // ATLAS SECTION
     app.get('/atlas', function(req, res) {
       // console.log(req.user._id);
 
-      db.collection('messages').find().toArray((err, result) => {
+      db.collection('posts').find().toArray((err, result) => {
         if (err) return console.log(err)
         res.render('atlas.ejs', {
           user : req.user
@@ -33,100 +133,196 @@ module.exports = function(app, passport, db) {
     });
 
     // BUSINESS & ECON SECTION
-    app.get('/business', function(req, res) {
-      // console.log(req.user._id);
-
-      db.collection('messages').find().toArray((err, result) => {
-        if (err) return console.log(err)
-        res.render('business.ejs', {
-          user : req.user
+    app.get('/atlas/business', isLoggedIn, function(req, res) {
+      var myUserId = ObjectId(req.session.passport.user)
+      var business = "businessEcon"
+      db.collection('users').find({
+        "_id": myUserId
+      }).toArray((err, user) => {
+        db.collection('posts').find({
+          "location": business
+        }).toArray((err, posts) => {
+          if (err) return console.log(err)
+          res.render('world.ejs', {
+            user: user[0],
+            posts: posts
+          })
         })
       })
     });
 
     // ART & AESTHETIC SECTION
-    app.get('/art', function(req, res) {
-      // console.log(req.user._id);
-
-      db.collection('messages').find().toArray((err, result) => {
-        if (err) return console.log(err)
-        res.render('art.ejs', {
-          user : req.user
+    app.get('/atlas/art', isLoggedIn, function(req, res) {
+      var myUserId = ObjectId(req.session.passport.user)
+      var artString = "artAesthetic"
+      db.collection('users').find({
+        "_id": myUserId
+      }).toArray((err, user) => {
+        db.collection('posts').find({
+          "location": artString
+        }).toArray((err, posts) => {
+          if (err) return console.log(err)
+          res.render('world.ejs', {
+            user: user[0],
+            posts: posts
+          })
         })
       })
     });
 
     // SCIENCE & TECH SECTION
-    app.get('/science', function(req, res) {
-      // console.log(req.user._id);
-
-      db.collection('messages').find().toArray((err, result) => {
-        if (err) return console.log(err)
-        res.render('science.ejs', {
-          user : req.user
+    app.get('/atlas/science', isLoggedIn, function(req, res) {
+      var myUserId = ObjectId(req.session.passport.user)
+      var science = "scienceTech"
+      db.collection('users').find({
+        "_id": myUserId
+      }).toArray((err, user) => {
+        db.collection('posts').find({
+          "location": science
+        }).toArray((err, posts) => {
+          if (err) return console.log(err)
+          res.render('world.ejs', {
+            user: user[0],
+            posts: posts
+          })
         })
       })
     });
 
     // EDUCATION & ACADEMIA SECTION
-    app.get('/academia', function(req, res) {
-      // console.log(req.user._id);
-
-      db.collection('messages').find().toArray((err, result) => {
-        if (err) return console.log(err)
-        res.render('academia.ejs', {
-          user : req.user
+    app.get('/atlas/academia', isLoggedIn, function(req, res) {
+      var myUserId = ObjectId(req.session.passport.user)
+      var academia = "eduAcad"
+      db.collection('users').find({
+        "_id": myUserId
+      }).toArray((err, user) => {
+        db.collection('posts').find({
+          "location": academia
+        }).toArray((err, posts) => {
+          if (err) return console.log(err)
+          res.render('world.ejs', {
+            user: user[0],
+            posts: posts
+          })
         })
       })
     });
 
     // SPIRITUALITY & GREATER THOUGHT SECTION
-    app.get('/spiritual', function(req, res) {
-      // console.log(req.user._id);
-
-      db.collection('messages').find().toArray((err, result) => {
-        if (err) return console.log(err)
-        res.render('spirit.ejs', {
-          user : req.user
+    app.get('/atlas/spiritual', isLoggedIn, function(req, res) {
+      var myUserId = ObjectId(req.session.passport.user)
+      var spiritual = "spiritAlt"
+      db.collection('users').find({
+        "_id": myUserId
+      }).toArray((err, user) => {
+        db.collection('posts').find({
+          "location": spiritual
+        }).toArray((err, posts) => {
+          if (err) return console.log(err)
+          res.render('world.ejs', {
+            user: user[0],
+            posts: posts
+          })
         })
       })
     });
 
-    // MEDIA & ENTERTAINMENT SECTION
-    app.get('/media', function(req, res) {
-      // console.log(req.user._id);
-
-      db.collection('messages').find().toArray((err, result) => {
-        if (err) return console.log(err)
-        res.render('media.ejs', {
-          user : req.user
+    //  MEDIA & ENTERTAINMENT SECTION
+    app.get('/atlas/media', isLoggedIn, function(req, res) {
+      var myUserId = ObjectId(req.session.passport.user)
+      var media = "mediaEntertainment"
+      db.collection('users').find({
+        "_id": myUserId
+      }).toArray((err, user) => {
+        db.collection('posts').find({
+          "location": media
+        }).toArray((err, posts) => {
+          if (err) return console.log(err)
+          res.render('world.ejs', {
+            user: user[0],
+            posts: posts
+          })
         })
       })
     });
 
     // GOV'T & POLITICS SECTION
-    app.get('/govt', function(req, res) {
-      // console.log(req.user._id);
-
-      db.collection('messages').find().toArray((err, result) => {
-        if (err) return console.log(err)
-        res.render('govt.ejs', {
-          user : req.user
+    app.get('/atlas/govt', isLoggedIn, function(req, res) {
+      var myUserId = ObjectId(req.session.passport.user)
+      var govt = "govtPolitics"
+      db.collection('users').find({
+        "_id": myUserId
+      }).toArray((err, user) => {
+        db.collection('posts').find({
+          "location": govt
+        }).toArray((err, posts) => {
+          if (err) return console.log(err)
+          res.render('world.ejs', {
+            user: user[0],
+            posts: posts
+          })
         })
       })
     });
 
 
-    // PROFILE SECTION =========================
-    app.get('/profile', isLoggedIn, function(req, res) {
-        db.collection('messages').find({id: req.user._id.toString()}).toArray((err, result) => {
+  // ADD COMRADE SECTION
+  app.get('/searchUser/:username', (req, res) => {
+        var username = req.params.username
+        db.collection('users').find({
+          "local.username": username
+        }).toArray((err, result) => {
+          console.log(result);
           if (err) return console.log(err)
-          res.render('profile.ejs', {
-            user : req.user,
-            messages: result
+          res.render('searchUser.ejs', {
+            user: result[0]
           })
         })
-    });
+      })
+
+    app.put('/addNewCom', (req, res) => {
+      var myUserId = ObjectId(req.session.passport.user)
+      var userToAdd = req.body.username
+      console.log(myUserId)
+      console.log(userToAdd)
+      db.collection('users')
+      .findOneAndUpdate({
+      _id: myUserId
+      }, {
+      $addToSet: {
+        "local.myComrades": userToAdd
+      }
+      }, {
+      sort: {
+        _id: -1
+      },
+      upsert: false
+    }, (err, result) => {
+      if (err) return res.send(err)
+      res.send(result)
+    })
+})
+
+    app.put('/removeCom', (req, res) => {
+      var myUserId = ObjectId(req.session.passport.user)
+      var userToRemove = req.body.username
+      db.collection('users')
+      .findOneAndUpdate({
+      _id: myUserId
+      }, {
+      $pull: {
+        "local.myComrades": userToRemove
+      }
+      }, {
+      sort: {
+        _id: -1
+      },
+      upsert: false
+    }, (err, result) => {
+      if (err) return res.send(err)
+      res.send(result)
+    })
+})
 
     // LOGOUT ==============================
     app.get('/logout', function(req, res) {
@@ -136,46 +332,48 @@ module.exports = function(app, passport, db) {
 
 // message board routes ===============================================================
 
-    app.post('/messages', (req, res) => {
-      db.collection('messages').save({name: req.body.name, msg: req.body.msg, thumbUp: 0, thumbDown:0}, (err, result) => {
+    app.post('/posts', (req, res) => {
+      console.log(req.body);
+      console.log(req.user);
+      db.collection('posts').save({userId: req.user._id.toString(), username: req.body.username, msg: req.body.msg, heartLike: 0, location: req.body.location}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
-        res.redirect('/profile')
+        res.redirect("/profile")
       })
     })
 
-    app.put('/messages', (req, res) => {
-      db.collection('messages')
-      .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
+    app.put('/posts', (req, res) => {
+      db.collection('posts')
+      .findOneAndUpdate({username: req.body.username, msg: req.body.msg}, {
         $set: {
-          thumbUp:req.body.thumbUp + 1
+          heartLike: req.body.heartLike + 1
         }
       }, {
         sort: {_id: -1},
-        upsert: true
+        upsert: false
       }, (err, result) => {
         if (err) return res.send(err)
         res.send(result)
       })
     })
 
-    app.put('/thumbDown', (req, res) => {
-      db.collection('messages')
-      .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
-        $set: {
-          thumbUp:req.body.thumbUp - 1
-        }
-      }, {
-        sort: {_id: -1},
-        upsert: true
-      }, (err, result) => {
-        if (err) return res.send(err)
-        res.send(result)
-      })
-    })
+    // app.put('/thumbDown', (req, res) => {
+    //   db.collection('messages')
+    //   .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
+    //     $set: {
+    //       thumbUp:req.body.thumbUp - 1
+    //     }
+    //   }, {
+    //     sort: {_id: -1},
+    //     upsert: true
+    //   }, (err, result) => {
+    //     if (err) return res.send(err)
+    //     res.send(result)
+    //   })
+    // })
 
-    app.delete('/messages', (req, res) => {
-      db.collection('messages').findOneAndDelete({name: req.body.name, msg: req.body.msg}, (err, result) => {
+    app.delete('/posts', (req, res) => {
+      db.collection('posts').findOneAndDelete({name: req.body.name, msg: req.body.msg}, (err, result) => {
         if (err) return res.send(500, err)
         res.send('Message deleted!')
       })

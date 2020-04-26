@@ -2,10 +2,83 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
-    <link rel="stylesheet" href="world.css">
+    <title>My Feed</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="feed.css">
+    <link href="https://fonts.googleapis.com/css?family=Audiowide|Bowlby+One|Bowlby+One+SC|Denk+One|Modak|Muli|Quantico|Ranchers|Roboto|Rubik+Mono+One|Staatliches&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Aldrich|Anton|Bangers|Bowlby+One+SC|Do+Hyeon|Orbitron|Oswald|Press+Start+2P|Quantico|Roboto+Mono|Rubik+Mono+One|Russo+One|Staatliches|VT323&display=swap" rel="stylesheet">
   </head>
   <body>
+    <header>
+      <nav>
+        <section>
+          <a href="/profile"><li class="leftMost">HOME</li></a>
+          <a href="/feed"><li>FEED</li></a>
+          <a href="/atlas"><li>ATLAS</li></a>
+        </section>
+        <section>
+          <li><span>YOUTOPIA</span></li>
+        </section>
+        <section>
+          <a href="/settings"><li class="rightMost">EDIT PROFILE</li></a>
+          <li class="rightMostest"><input id="searchBox" type="text" name="" placeholder="search"><button id="sendSearch" type="button" name="button"></button></li>
+        </section>
+      </nav>
+    </header>
+    <section class="container">
+      <section class="userTools">
+        <% if (user.local.email) { %>
+          <section>
+            <strong><h2>Welcome To Your Feed, @<%= user.local.username %>!</h2> </strong>
+          </section>
+          <section class="userAvatar">
+            <img src="<%= user.local.avatar %>" alt="users custom avatar">
+          </section>
+          <section>
+            <form action="/posts" method="POST">
+              <input class="hideContent" type="text" value="@<%= user.local.username %>" readonly="true" name="username">
+              <textarea name="msg" placeholder="What are your thoughts?"></textarea>
+              <br>
+              <select class="makeBlue" class="postLocation" name="location">
+                <option value="feed">FEED</option>
+                <option value="artAesthetic">ART & AESTHETIC</option>
+                <option value="businessEcon">BUSINESS & ECONOMY</option>
+                <option value="eduAcad">EDUCATION & ACADEMIA</option>
+                <option value="govtPolitics">GOVERNMENT & POLITICS</option>
+                <option value="mediaEntertainment">MEDIA & ENTERTAINMENT</option>
+                <option value="spiritAlt">SPIRITUALITY & ALT THOUGHT</option>
+                <option value="scienceTech">SCIENCE & TECHNOLOGY</option>
+              </select>
+              <br>
+              <button class="makeGreen" type="submit">Submit</button>
+            </form>
+          </section>
+        <% } %>
+      </section>
+
+    <section class="postBoxContainer">
+      <section class="viewPosts">
+        <% let myComrades = user.local.myComrades %>
+        <% for (var i=0; i < posts.length; i++) {%>
+          <% let username = posts[i].username.substring(1) %>
+          <% if (myComrades.includes(username)){ %>
+            <ul class="myPosts">
+              <li class="postBox" method="GET">
+                <span class="userName"><%= posts[i].username %></span>
+                <span><%= posts[i].msg %></span>
+                <span><%= posts[i].heartLike %></span>
+                <span class="heartLike"><i class="fas fa-heart" aria-hidden="true"></i></span>
+              </li>
+            </ul>
+            <% } %>
+          <% } %>
+        </section>
+    </section>
+  </section>
+
 
   </body>
+  <script src="https://kit.fontawesome.com/077191d827.js" crossorigin="anonymous"></script>
+  <script src="feed.js"></script>
 </html>

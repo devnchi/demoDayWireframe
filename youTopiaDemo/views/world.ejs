@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>YouTopia Atlas</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/world.css">
+    <link href="https://fonts.googleapis.com/css?family=Audiowide|Bowlby+One|Bowlby+One+SC|Denk+One|Modak|Muli|Quantico|Ranchers|Roboto|Rubik+Mono+One|Staatliches&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Aldrich|Anton|Bangers|Bowlby+One+SC|Do+Hyeon|Orbitron|Oswald|Press+Start+2P|Quantico|Roboto+Mono|Rubik+Mono+One|Russo+One|Staatliches|VT323&display=swap" rel="stylesheet">
+  <body>
+    <header>
+      <nav>
+        <section>
+          <a href="/profile"><li class="leftMost">HOME</li></a>
+          <a href="/feed"><li>FEED</li></a>
+          <a href="/atlas"><li>ATLAS</li></a>
+        </section>
+        <section>
+          <li><span>YOUTOPIA</span></li>
+        </section>
+        <section>
+          <a href="/settings"><li class="rightMost">EDIT PROFILE</li></a>
+          <li class="rightMostest"><input id="searchBox" type="text" name="" placeholder="search"><button id="sendSearch" type="button" name="button"></button></li>
+        </section>
+      </nav>
+    </header>
+    <% if (posts[0].location === "artAesthetic") { %>
+      <section class="widgetHero">
+        <!-- start sw-rss-feed code -->
+        <!-- start sw-rss-feed code -->
+        <script type="text/javascript">
+        <!--
+        rssfeed_url = new Array();
+        rssfeed_url[0]="artnews.com/feed"; rssfeed_url[1]="thisiscolossal.com/feed "; rssfeed_url[2]="feeds.feedburner.com/Art21Blog";
+        rssfeed_frame_width="1280";
+        rssfeed_frame_height="400";
+        rssfeed_scroll="on";
+        rssfeed_scroll_step="6";
+        rssfeed_scroll_bar="off";
+        rssfeed_target="_blank";
+        rssfeed_font_size="12";
+        rssfeed_font_face="";
+        rssfeed_border="on";
+        rssfeed_css_url="https://feed.surfing-waves.com/css/style3a.css";
+        rssfeed_title="off";
+        rssfeed_title_name="";
+        rssfeed_title_bgcolor="#3366ff";
+        rssfeed_title_color="#fff";
+        rssfeed_title_bgimage="";
+        rssfeed_footer="off";
+        rssfeed_footer_name="rss feed";
+        rssfeed_footer_bgcolor="#fff";
+        rssfeed_footer_color="#333";
+        rssfeed_footer_bgimage="";
+        rssfeed_item_title_length="50";
+        rssfeed_item_title_color="#666";
+        rssfeed_item_bgcolor="#fff";
+        rssfeed_item_bgimage="";
+        rssfeed_item_border_bottom="on";
+        rssfeed_item_source_icon="off";
+        rssfeed_item_date="off";
+        rssfeed_item_description="on";
+        rssfeed_item_description_length="120";
+        rssfeed_item_description_color="#666";
+        rssfeed_item_description_link_color="#333";
+        rssfeed_item_description_tag="off";
+        rssfeed_no_items="0";
+        rssfeed_cache = "209662b3a1915f5b66cc78a38119951d";
+        //-->
+        </script>
+        <script type="text/javascript" src="//feed.surfing-waves.com/js/rss-feed.js"></script>
+        <!-- The link below helps keep this service FREE, and helps other people find the SW widget. Please be cool and keep it! Thanks. -->
+        <div style="color:#ccc;font-size:10px; text-align:right; width:1280px;">powered by <a href="https://surfing-waves.com" rel="noopener" target="_blank" style="color:#ccc;">Surfing Waves</a></div>
+        <!-- end sw-rss-feed code -->
+      </section>
+      <%  } %>
+
+
+    <% if (posts[0].location === "businessEcon") { %>
+      <section class="widgetHero">
+        <!-- start sw-rss-feed code -->
+        <script type="text/javascript">
+        <!--
+        rssfeed_url = new Array();
+        rssfeed_url[0]="fortune.com/feed "; rssfeed_url[1]="freakonomics.com/feed "; rssfeed_url[2]="blogs.wsj.com/economics/feed"; rssfeed_url[3]="http://www.cnbc.com/id/19746125/device/rss/rss.xml";
+        rssfeed_frame_width="1280";
+        rssfeed_frame_height="400";
+        rssfeed_scroll="on";
+        rssfeed_scroll_step="6";
+        rssfeed_scroll_bar="off";
+        rssfeed_target="_blank";
+        rssfeed_font_size="12";
+        rssfeed_font_face="";
+        rssfeed_border="on";
+        rssfeed_css_url="https://feed.surfing-waves.com/css/style3a.css";
+        rssfeed_title="off";
+        rssfeed_title_name="";
+        rssfeed_title_bgcolor="#3366ff";
+        rssfeed_title_color="#fff";
+        rssfeed_title_bgimage="";
+        rssfeed_footer="off";
+        rssfeed_footer_name="rss feed";
+        rssfeed_footer_bgcolor="#fff";
+        rssfeed_footer_color="#333";
+        rssfeed_footer_bgimage="";
+        rssfeed_item_title_length="50";
+        rssfeed_item_title_color="#666";
+        rssfeed_item_bgcolor="#fff";
+        rssfeed_item_bgimage="";
+        rssfeed_item_border_bottom="on";
+        rssfeed_item_source_icon="off";
+        rssfeed_item_date="off";
+        rssfeed_item_description="on";
+        rssfeed_item_description_length="120";
+        rssfeed_item_description_color="#666";
+        rssfeed_item_description_link_color="#333";
+        rssfeed_item_description_tag="off";
+        rssfeed_no_items="0";
+        rssfeed_cache = "209662b3a1915f5b66cc78a38119951d";
+        //-->
+        </script>
+        <script type="text/javascript" src="//feed.surfing-waves.com/js/rss-feed.js"></script>
+        <!-- The link below helps keep this service FREE, and helps other people find the SW widget. Please be cool and keep it! Thanks. -->
+        <div style="color:#ccc;font-size:10px; text-align:right; width:1280px;">powered by <a href="https://surfing-waves.com" rel="noopener" target="_blank" style="color:#ccc;">Surfing Waves</a></div>
+        <!-- end sw-rss-feed code -->
+      </section>
+      <%  } %>
+
+
+    <% if (posts[0].location === "govtPolitics") { %>
+      <section class="widgetHero">
+        <!-- start sw-rss-feed code -->
+  <script type="text/javascript">
+  <!--
+  rssfeed_url = new Array();
+  rssfeed_url[0]="http://rss.cnn.com/rss/cnn_us.rss"; rssfeed_url[1]="http://rss.cnn.com/rss/cnn_world.rss"; rssfeed_url[2]="https://www.usa.gov/rss/updates.xml";
+  rssfeed_frame_width="1280";
+  rssfeed_frame_height="400";
+  rssfeed_scroll="on";
+  rssfeed_scroll_step="6";
+  rssfeed_scroll_bar="off";
+  rssfeed_target="_blank";
+  rssfeed_font_size="12";
+  rssfeed_font_face="";
+  rssfeed_border="on";
+  rssfeed_css_url="https://feed.surfing-waves.com/css/style3a.css";
+  rssfeed_title="off";
+  rssfeed_title_name="";
+  rssfeed_title_bgcolor="#3366ff";
+  rssfeed_title_color="#fff";
+  rssfeed_title_bgimage="";
+  rssfeed_footer="off";
+  rssfeed_footer_name="rss feed";
+  rssfeed_footer_bgcolor="#fff";
+  rssfeed_footer_color="#333";
+  rssfeed_footer_bgimage="";
+  rssfeed_item_title_length="50";
+  rssfeed_item_title_color="#666";
+  rssfeed_item_bgcolor="#fff";
+  rssfeed_item_bgimage="";
+  rssfeed_item_border_bottom="on";
+  rssfeed_item_source_icon="off";
+  rssfeed_item_date="off";
+  rssfeed_item_description="on";
+  rssfeed_item_description_length="120";
+  rssfeed_item_description_color="#666";
+  rssfeed_item_description_link_color="#333";
+  rssfeed_item_description_tag="off";
+  rssfeed_no_items="0";
+  rssfeed_cache = "209662b3a1915f5b66cc78a38119951d";
+  //-->
+  </script>
+  <script type="text/javascript" src="//feed.surfing-waves.com/js/rss-feed.js"></script>
+  <!-- The link below helps keep this service FREE, and helps other people find the SW widget. Please be cool and keep it! Thanks. -->
+  <div style="color:#ccc;font-size:10px; text-align:right; width:1280px;">powered by <a href="https://surfing-waves.com" rel="noopener" target="_blank" style="color:#ccc;">Surfing Waves</a></div>
+  <!-- end sw-rss-feed code -->
+      </section>
+      <%  } %>
+
+
+    <% if (posts[0].location === "mediaEntertainment") { %>
+      <section class="widgetHero">
+        <!-- start sw-rss-feed code -->
+        <script type="text/javascript">
+        <!--
+        rssfeed_url = new Array();
+        rssfeed_url[0]="https://assets.complex.com/feeds/channels/all.xml"; rssfeed_url[1]="http://rss.cnn.com/rss/cnn_showbiz.rss";
+        rssfeed_frame_width="1280";
+        rssfeed_frame_height="400";
+        rssfeed_scroll="on";
+        rssfeed_scroll_step="6";
+        rssfeed_scroll_bar="off";
+        rssfeed_target="_blank";
+        rssfeed_font_size="12";
+        rssfeed_font_face="";
+        rssfeed_border="on";
+        rssfeed_css_url="https://feed.surfing-waves.com/css/style3a.css";
+        rssfeed_title="off";
+        rssfeed_title_name="";
+        rssfeed_title_bgcolor="#3366ff";
+        rssfeed_title_color="#fff";
+        rssfeed_title_bgimage="";
+        rssfeed_footer="off";
+        rssfeed_footer_name="rss feed";
+        rssfeed_footer_bgcolor="#fff";
+        rssfeed_footer_color="#333";
+        rssfeed_footer_bgimage="";
+        rssfeed_item_title_length="50";
+        rssfeed_item_title_color="#666";
+        rssfeed_item_bgcolor="#fff";
+        rssfeed_item_bgimage="";
+        rssfeed_item_border_bottom="on";
+        rssfeed_item_source_icon="off";
+        rssfeed_item_date="off";
+        rssfeed_item_description="on";
+        rssfeed_item_description_length="120";
+        rssfeed_item_description_color="#666";
+        rssfeed_item_description_link_color="#333";
+        rssfeed_item_description_tag="off";
+        rssfeed_no_items="0";
+        rssfeed_cache = "209662b3a1915f5b66cc78a38119951d";
+        //-->
+        </script>
+        <script type="text/javascript" src="//feed.surfing-waves.com/js/rss-feed.js"></script>
+        <!-- The link below helps keep this service FREE, and helps other people find the SW widget. Please be cool and keep it! Thanks. -->
+        <div style="color:#ccc;font-size:10px; text-align:right; width:1280px;">powered by <a href="https://surfing-waves.com" rel="noopener" target="_blank" style="color:#ccc;">Surfing Waves</a></div>
+        <!-- end sw-rss-feed code -->
+      </section>
+      <%  } %>
+
+
+    <% if (posts[0].location === "spiritAlt") { %>
+      <section class="widgetHero">
+        <!-- start sw-rss-feed code -->
+        <script type="text/javascript">
+        <!--
+        rssfeed_url = new Array();
+        rssfeed_url[0]="numerologist.com/feed"; rssfeed_url[1]="lifebysoul.com/feed"; rssfeed_url[2]="psychic-readings-guide.com/feed "; rssfeed_url[3]="https://www.spiritualityandpractice.com/rss"; rssfeed_url[4]="themindfulword.org/feed ";
+        rssfeed_frame_width="1280";
+        rssfeed_frame_height="400";
+        rssfeed_scroll="on";
+        rssfeed_scroll_step="6";
+        rssfeed_scroll_bar="off";
+        rssfeed_target="_blank";
+        rssfeed_font_size="12";
+        rssfeed_font_face="";
+        rssfeed_border="on";
+        rssfeed_css_url="https://feed.surfing-waves.com/css/style3a.css";
+        rssfeed_title="off";
+        rssfeed_title_name="";
+        rssfeed_title_bgcolor="#3366ff";
+        rssfeed_title_color="#fff";
+        rssfeed_title_bgimage="";
+        rssfeed_footer="off";
+        rssfeed_footer_name="rss feed";
+        rssfeed_footer_bgcolor="#fff";
+        rssfeed_footer_color="#333";
+        rssfeed_footer_bgimage="";
+        rssfeed_item_title_length="50";
+        rssfeed_item_title_color="#666";
+        rssfeed_item_bgcolor="#fff";
+        rssfeed_item_bgimage="";
+        rssfeed_item_border_bottom="on";
+        rssfeed_item_source_icon="off";
+        rssfeed_item_date="off";
+        rssfeed_item_description="on";
+        rssfeed_item_description_length="120";
+        rssfeed_item_description_color="#666";
+        rssfeed_item_description_link_color="#333";
+        rssfeed_item_description_tag="off";
+        rssfeed_no_items="0";
+        rssfeed_cache = "209662b3a1915f5b66cc78a38119951d";
+        //-->
+        </script>
+        <script type="text/javascript" src="//feed.surfing-waves.com/js/rss-feed.js"></script>
+        <!-- The link below helps keep this service FREE, and helps other people find the SW widget. Please be cool and keep it! Thanks. -->
+        <div style="color:#ccc;font-size:10px; text-align:right; width:1280px;">powered by <a href="https://surfing-waves.com" rel="noopener" target="_blank" style="color:#ccc;">Surfing Waves</a></div>
+        <!-- end sw-rss-feed code -->
+      </section>
+      <%  } %>
+
+
+    <% if (posts[0].location === "scienceTech") { %>
+      <section class="widgetHero">
+        <!-- start sw-rss-feed code -->
+        <script type="text/javascript">
+        <!--
+        rssfeed_url = new Array();
+        rssfeed_url[0]="https://hnrss.org/frontpage"; rssfeed_url[1]="http://rss.cnn.com/rss/cnn_health.rss"; rssfeed_url[2]="https://www.techrepublic.com/rssfeeds/articles/";
+        rssfeed_frame_width="1280";
+        rssfeed_frame_height="400";
+        rssfeed_scroll="on";
+        rssfeed_scroll_step="6";
+        rssfeed_scroll_bar="off";
+        rssfeed_target="_blank";
+        rssfeed_font_size="12";
+        rssfeed_font_face="";
+        rssfeed_border="on";
+        rssfeed_css_url="https://feed.surfing-waves.com/css/style3a.css";
+        rssfeed_title="off";
+        rssfeed_title_name="";
+        rssfeed_title_bgcolor="#3366ff";
+        rssfeed_title_color="#fff";
+        rssfeed_title_bgimage="";
+        rssfeed_footer="off";
+        rssfeed_footer_name="rss feed";
+        rssfeed_footer_bgcolor="#fff";
+        rssfeed_footer_color="#333";
+        rssfeed_footer_bgimage="";
+        rssfeed_item_title_length="50";
+        rssfeed_item_title_color="#666";
+        rssfeed_item_bgcolor="#fff";
+        rssfeed_item_bgimage="";
+        rssfeed_item_border_bottom="on";
+        rssfeed_item_source_icon="off";
+        rssfeed_item_date="off";
+        rssfeed_item_description="on";
+        rssfeed_item_description_length="120";
+        rssfeed_item_description_color="#666";
+        rssfeed_item_description_link_color="#333";
+        rssfeed_item_description_tag="off";
+        rssfeed_no_items="0";
+        rssfeed_cache = "209662b3a1915f5b66cc78a38119951d";
+        //-->
+        </script>
+        <script type="text/javascript" src="//feed.surfing-waves.com/js/rss-feed.js"></script>
+        <!-- The link below helps keep this service FREE, and helps other people find the SW widget. Please be cool and keep it! Thanks. -->
+        <div style="color:#ccc;font-size:10px; text-align:right; width:1280px;">powered by <a href="https://surfing-waves.com" rel="noopener" target="_blank" style="color:#ccc;">Surfing Waves</a></div>
+        <!-- end sw-rss-feed code -->
+      </section>
+      <%  } %>
+
+
+      <section class="containerSec">
+        <section class="userTools">
+          <section>
+          <% if (user.local.email) { %>
+            <section>
+              <strong><h2>Welcome, @<%= user.local.username %>!</h2> </strong>
+            </section>
+            <section class="userAvatar">
+              <img src="/<%= user.local.avatar %>" alt="users custom avatar">
+            </section>
+            <section>
+              <form action="/posts" method="POST">
+                <input class="hideContent" type="text" value="@<%= user.local.username %>" readonly="true" name="username">
+                <textarea name="msg" placeholder="What are your thoughts?"></textarea>
+                <br>
+                <select class="makeBlue" class="postLocation" name="location">
+                  <option value="feed">FEED</option>
+                  <option value="artAesthetic">ART & AESTHETIC</option>
+                  <option value="businessEcon">BUSINESS & ECONOMY</option>
+                  <option value="eduAcad">EDUCATION & ACADEMIA</option>
+                  <option value="govtPolitics">GOVERNMENT & POLITICS</option>
+                  <option value="mediaEntertainment">MEDIA & ENTERTAINMENT</option>
+                  <option value="spiritAlt">SPIRITUALITY & ALT THOUGHT</option>
+                  <option value="scienceTech">SCIENCE & TECHNOLOGY</option>
+                </select>
+                <br>
+                <button class="makeGreen" type="submit">Submit</button>
+              </form>
+            </section>
+            <% } %>
+        </section>
+      <% if (posts[0].location === "spiritAlt") { %>
+        <section class="showApi">
+          <div id = "box">
+            <h1>Curious about your zodiac sign?</h1>
+          </div>
+          <h2>Enter your birthday</h2>
+          <p> Month:<input type="number" id="month" min="1" max="12"></p>
+          <p> Day:<input type="number" id="day" min="1" max="31"></p>
+          <a id="styled" onclick="zodiac()" class="button"><button type="button" name="button">Find your zodiac sign!</button></a>
+          <br>
+          <br>
+          <br>
+          <br>
+          <p id="photo"></p>
+          <p id= "space"><span id="result"></span></p>
+          <br>
+          <p id="characteristic"></p>
+        </section>
+    <%  } %>
+
+    <% if (posts[0].location === "scienceTech") { %>
+      <section>
+        <section class="searchBox">
+          <section>
+            <p>Access Nasa's "Photo of the Day" directory by enter a date.</p>
+          </section>
+          <section>
+            <form class="" action="index.html" method="post">
+              <input type="date" name="" value="" id="date">
+              <button type="button" name="button" id="activate"><i class="fas fa-search"></i></button>
+            </form>
+          </section>
+        </section>
+        <section id="content">
+          <img id="nasaPic" src="" alt="">
+          <iframe id="nasaFrame" src="" allowfullscreen></iframe>
+          <p id="picDescription"></p>
+        </section>
+      </section>
+  <%  } %>
+  </section>
+
+    <section class="postBoxContainer">
+      <div class="viewPosts">
+        <ul class="myPosts">
+        <% for(var i=0; i<posts.length; i++) {%>
+          <li class="postBox" method="GET">
+            <span class="userName"><%= posts[i].username %></span>
+            <span><%= posts[i].msg %></span>
+            <span><%= posts[i].heartLike %></span>
+            <span class="heartLike"><i class="fas fa-heart" aria-hidden="true"></i></span>
+          </li>
+        <% } %>
+        </ul>
+      </div>
+    </section>
+
+  </section>
+
+
+    <script src="https://kit.fontawesome.com/077191d827.js" crossorigin="anonymous"></script>
+    <script src="/world.js"></script>
+    <script src="/horoscope.js"></script>
+    <script src="/nasa.js"></script>
+  </body>
+</html>

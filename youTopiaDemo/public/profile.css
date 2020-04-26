@@ -1,8 +1,58 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
 * {
   box-sizing: border-box;
 }
 body {
-
+	color: white;
+	background-color: black;
 }
 body li {
   list-style-type: none;
@@ -13,17 +63,174 @@ nav {
   text-align: center;
   align-content: center;
 }
+nav li {
+	margin: 7%;
+	color: rgb(142, 243, 189);
+}
 nav section {
   float: left;
   width: 33.3333%;
 }
 header {
   width: 100%;
-  height: 60px;
+  height: 99px;
+	background-color: rgb(155, 0, 139);
+	font-family: 'Aldrich', sans-serif;
+}
+header span {
+	font-size: 45px;
+	margin-left: 45%;
+	margin-top: 0;
+	color: white;
+}
+.leftMost {
+	margin-left: 10%;
+}
+.rightMost {
+	margin-left: 10%;
+}
+.rightMostest {
+	margin-left: 10%;
 }
 .leftColumn {
   color: black;
 }
 .container {
-  margin-top: 5%;
+  margin-top: 9%;
 }
+.userBox {
+  width: 40%;
+  float: left;
+  margin-right: 10%;
+  background-color: rgb(155, 0, 139);
+  padding: 3%;
+  border-radius: 2%;
+  margin-left: -5%;
+  display: block;
+  text-align: center;
+  color: white;
+}
+.userBox section {
+  width: 100%;
+  margin: 50px auto;
+  font-family: 'Do Hyeon', sans-serif;
+}
+.userBox h2 {
+  font-size: 55px;
+  font-family: 'Audiowide', cursive;
+	color: rgb(142, 243, 189);
+}
+.userBox img {
+  width: 70%;
+  display: inline-block;
+  justify-content: center;
+}
+.woContent {
+	font-family: 'Audiowide', cursive;
+	font-size: 25px;
+	font-weight: bolder;
+	color: rgb(142, 243, 189);
+}
+.withContent {
+	font-family: 'Do Hyeon', sans-serif;
+	font-size: 20px;
+}
+.postBoxContainer {
+  width: 55%;
+  float: left;
+}
+.makePost {
+  width: 100%;
+  text-align: center;
+  font-family: 'Do Hyeon', sans-serif;
+}
+.makePost h2 {
+  font-family: 'Do Hyeon', sans-serif;
+  margin-bottom: 2%;
+	font-size: 40px;
+	color: rgb(142, 243, 189);
+}
+.makeGreen {
+	background-color: rgb(142, 243, 189);
+}
+.makeBlue {
+	background-color: lightblue;
+}
+.makePost input {
+  margin-top: 2%;
+  padding: 2% auto;
+}
+textarea {
+  width: 70%;
+  height: 125px;
+  text-align: center;
+  padding: 2%;
+}
+.myPosts li {
+  width: 100%;
+  font-size: 25px;
+	font-family: 'Orbitron', sans-serif;
+}
+.viewPosts {
+margin-top: 5%;
+}
+.hideContent {
+  display: none;
+}
+.userName {
+	color: rgb(142, 243, 189);
+}
+.heartLike {
+	color: red;
+}
+.trashCan{
+	color: lightblue;
+}
+.leftBox {
+	width: 50%;
+	float: left;
+	margin-left: 5%;
+	text-align: center;
+	font-family: 'Do Hyeon', sans-serif;
+}
+.leftBox a {
+	text-decoration: none;
+	color: yellow;
+}
+.leftBox a:hover {
+	text-decoration: none;
+	color: yellow;
+
+}
+.leftBox h2 {
+	font-size: 45px;
+	color: rgb(142, 243, 189);
+	text-align: center;
+	font-family: 'Audiowide', cursive;
+	font-weight: bolder;
+	margin-bottom: 3%;
+}
+.leftBox img {
+	width: 50%;
+	display: inline-block;
+	justify-content: center;
+}
+.rightBox {
+	width: 40%;
+	float: left;
+	text-align: center;
+	margin-top: 5%;
+	font-family: 'Audiowide', cursive;
+}
+.rightBox textarea {
+	width: 50%;
+}
+.rightBox input {
+	width: 50%;
+	height: 30px;
+}
+.makeGreen {
+	background-color: rgb(142, 243, 189);
+	color: white;
+	font-family: 'Do Hyeon', sans-serif;
+	font-size: 25px;

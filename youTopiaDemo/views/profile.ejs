@@ -5,82 +5,104 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="profile.css">
+    <link href="https://fonts.googleapis.com/css?family=Audiowide|Bowlby+One|Bowlby+One+SC|Denk+One|Modak|Muli|Quantico|Ranchers|Roboto|Rubik+Mono+One|Staatliches&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Aldrich|Anton|Bangers|Bowlby+One+SC|Do+Hyeon|Orbitron|Oswald|Press+Start+2P|Quantico|Roboto+Mono|Rubik+Mono+One|Russo+One|Staatliches|VT323&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
     <nav>
       <section>
-        <a href="/profile"><li>HOME</li></a>
+        <a href="/profile"><li class="leftMost">HOME</li></a>
         <a href="/feed"><li>FEED</li></a>
         <a href="/atlas"><li>ATLAS</li></a>
       </section>
       <section>
-        <h1>YOUTOPIA</h1>
+        <li><span>YOUTOPIA</span></li>
       </section>
       <section>
-        <li><input type="text" name="" value="search"><button type="button" name="button"></button></li>
-        <a href="#"><li>Settings</li></a>
+        <a href="/settings"><li class="rightMost">EDIT PROFILE</li></a>
+        <li class="rightMostest"><input id="searchBox" type="text" name="" placeholder="search"><button id="sendSearch" type="button" name="button"></button></li>
       </section>
     </nav>
   </header>
-<div class="container">
-    <div class="row">
-
-        <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
-
+  <div class="container">
+        <!-- LOCAL USER INFORMATION -->
+            <div class="userBox">
                 <% if (user.local.email) { %>
-                  <p>
-                    <strong>Welcome Home, @username.</strong>
+                  <section>
+                    <strong><h2>Welcome Home, @<%= user.local.username %>!</h2> </strong>
+                  </section>
+                  <section class="userAvatar">
+                    <img src="<%= user.local.avatar %>" alt="users custom avatar">
+                  </section>
+                  <section>
+                    <strong class="woContent">ABOUT:</strong>
                     <br>
-                    <strong>You have (7) messages today.</strong>
+                    <strong class="withContent"><%= user.local.about %></strong>
+                  </section>
+                  <section>
+                    <strong class="woContent">LOCATION:</strong>
                     <br>
-                    <strong>ABOUT:</strong>
+                    <strong class="withContent"><%= user.local.location %></strong>
+                  </section>
+                  <section>
+                    <strong class="woContent">COMRADES:</strong>
                     <br>
-                    <strong>LOCATION:</strong>
-                    <br>
-                    <strong>COMRADES:...   </strong>
-                    <strong>CAMARADARIE:...</strong>
-
+                    <% if (user.local.myComrades.length > 0) { %>
+                    <strong class="withContent">@<%= user.local.myComrades.join(', @') %></strong>
+                  </section>
+              <% } %>
                       <!-- <strong>id</strong>: <%= user._id %><br>
                       <strong>email</strong>: <%= user.local.email %><br>
                       <strong>password</strong>: <%= user.local.password %> -->
-                  </p>
-                    <a href="/unlink/local" class="btn btn-default">Unlink</a>
+                    <!-- <a href="/unlink/local" class="btn btn-default">Unlink</a>
                 <% } else { %>
                     <a href="/connect/local" class="btn btn-default">Connect Local</a>
-                <% } %>
+                <% } %> -->
 
             </div>
-        </div>
-        <div class="col-sm-6">
-          <h2>Create a Post</h2>
-        <% if (user.local.email) { %>
-          <form action="/messages" method="POST">
-            <!-- <input type="text" value="<%= user.local.email %>" name="name"> -->
-            <textarea name="msg" placeholder="what's on your mind?"></textarea>
-            <button type="submit">Submit</button>
-          </form>
-        </div>
-        <% } %>
 
-          <h3>My Posts</h3>
-          <ul class="messages">
-          <% for(var i=0; i<messages.length; i++) {%>
-            <li class="message">
-              <span><%= messages[i].name %></span>
-              <span><%= messages[i].msg %></span>
-              <span><%= messages[i].thumbUp %></span>
-              <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-              <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
-              <span><i class="fa fa-trash" aria-hidden="true"></i></span>
-            </li>
+
+        <div class="postBoxContainer">
+          <div class="makePost">
+            <h2>Create a Post</h2>
+          <% if (user.local.email) { %>
+            <form action="/posts" method="POST">
+              <input class="hideContent" type="text" value="@<%= user.local.username %>" readonly="true" name="username">
+              <textarea name="msg" placeholder="What are your thoughts?"></textarea>
+              <br>
+              <select class="makeBlue" class="postLocation" name="location">
+                <option value="feed">FEED</option>
+                <option value="artAesthetic">ART & AESTHETIC</option>
+                <option value="businessEcon">BUSINESS & ECONOMY</option>
+                <option value="eduAcad">EDUCATION & ACADEMIA</option>
+                <option value="govtPolitics">GOVERNMENT & POLITICS</option>
+                <option value="mediaEntertainment">MEDIA & ENTERTAINMENT</option>
+                <option value="spiritAlt">SPIRITUALITY & ALT THOUGHT</option>
+                <option value="scienceTech">SCIENCE & TECHNOLOGY</option>
+              </select>
+              <br>
+              <button class="makeGreen" type="submit">Submit</button>
+            </form>
           <% } %>
-          </ul>
+          </div>
 
+          <div class="viewPosts">
+            <ul class="myPosts">
+            <% for(var i=0; i<posts.length; i++) {%>
+              <li class="postBox" method="GET">
+                <span class="userName"><%= posts[i].username %></span>
+                <span><%= posts[i].msg %></span>
+                <span><%= posts[i].heartLike %></span>
+                <span class="heartLike"><i class="fas fa-heart" aria-hidden="true"></i></span>
+                <span class="trashCan"><i class="fa fa-trash" aria-hidden="true"></i></span>
+              </li>
+            <% } %>
+            </ul>
+          </div>
+        </div>
 </div>
+
 
 <script src="https://kit.fontawesome.com/077191d827.js" crossorigin="anonymous"></script>
 <script src="main.js"></script>

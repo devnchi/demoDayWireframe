@@ -1,5 +1,3 @@
-// I worked on this project with Ryan F.T.
-
 // set up ======================================================================
 // get all the tools we need
 var express  = require('express');
@@ -10,6 +8,8 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
 
+var multer = require('multer');
+var gravatar = require('gravatar');
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
@@ -19,11 +19,13 @@ var configDB = require('./config/database.js');
 
 var db
 
+var ObjectId = require('mongodb').ObjectID;
+
 // configuration ===============================================================
 mongoose.connect(configDB.url, (err, database) => {
   if (err) return console.log(err)
   db = database
-  require('./app/routes.js')(app, passport, db);
+  require('./app/routes.js')(app, passport, db, multer, ObjectId);
 }); // connect to our database
 
 //app.listen(port, () => {
@@ -57,6 +59,17 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
+
+
+// GRAVATAR REQs
+// gravatar.url(email);
+// gravatar.url(email, options);
+// gravatar.url(email, options, protocol);
+//
+// gravatar.profile_url(email);
+// gravatar.profile_url(email, options);
+// gravatar.profile_url(email, options, protocol);
+console.log(gravatar);
 
 
 // routes ======================================================================

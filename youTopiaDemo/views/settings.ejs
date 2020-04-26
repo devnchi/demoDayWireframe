@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Profile Settings</title>
+    <link rel="stylesheet" href="profile.css">
+    <link href="https://fonts.googleapis.com/css?family=Audiowide|Bowlby+One|Bowlby+One+SC|Denk+One|Modak|Muli|Quantico|Ranchers|Roboto|Rubik+Mono+One|Staatliches&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Aldrich|Anton|Bangers|Bowlby+One+SC|Do+Hyeon|Orbitron|Oswald|Press+Start+2P|Quantico|Roboto+Mono|Rubik+Mono+One|Russo+One|Staatliches|VT323&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <section>
+          <a href="/profile"><li class="leftMost">HOME</li></a>
+          <a href="/feed"><li>FEED</li></a>
+          <a href="/atlas"><li>ATLAS</li></a>
+        </section>
+        <section>
+          <li><span>YOUTOPIA</span></li>
+        </section>
+        <section>
+          <a href="/settings"><li class="rightMost">EDIT PROFILE</li></a>
+          <!-- <li class="rightMostest"><input id="searchBox" type="text" name="" placeholder="search"><button id="sendSearch" type="button" name="button"></button></li> -->
+        </section>
+      </nav>
+    </header>
+    <section class="container">
+      <div class="leftBox">
+        <h2>Upload Avatar</h2>
+        <!-- IMAGE UPLOAD -->
+        <form action="/uploadAvatar" enctype="multipart/form-data" method="post">
+           <img src="<%= user.local.avatar %>" alt="">
+           <input type="file" name="file-to-upload">
+           <input class="makeGreen" type="submit" value="Upload">
+        </form>
+
+        <p>To manage your avatar, go to <a href="https://getavataaars.com">Avataaars</a> and download the .png file for upload.</p>
+      </div>
+
+
+      <div class="rightBox">
+        <form class="">
+          <section>
+            <p class="woContent">Email:</p>
+            <br>
+            <p><%= user.local.email %></p>
+          </section>
+          <br>
+          <section>
+            <strong class="woContent">ABOUT:</strong>
+            <br>
+            <textarea name="newBio" placeholder="tell us about yourself" id="updateBio"></textarea>
+          </section>
+          <br>
+          <section>
+            <strong class="woContent">LOCATION:</strong>
+            <br>
+            <input id="updateLocation" type="text" name="newLocation" value="" placeholder="where are you located?">
+          </section>
+          <br>
+          <% if (user.local.myComrades > 0) { %>
+          <section>
+            <strong class="woContent">COMRADES: <%= user.local.myComrades.join(', ') %> </strong>
+          </section>
+      <%  } %>
+          <button class="makeGreen" type="submit" id="updateProfile">UPDATE PROFILE</button>
+        </form>
+
+
+
+              <!-- <a href="/unlink/local" class="btn btn-default">Unlink</a>
+              <a href="/connect/local" class="btn btn-default">Connect Local</a> -->
+
+              <script src="settings.js"></script>
+      </div>
+    </section>
+  </body>
+</html>
+
+
+<!-- <strong>id</strong>: <%= user._id %><br>
+<strong>email</strong>: <%= user.local.email %><br>
+<strong>password</strong>: <%= user.local.password %> -->

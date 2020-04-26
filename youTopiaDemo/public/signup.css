@@ -1,12 +1,10 @@
 body{
-  background-image: url("./images/spaceTravel2.gif");
-  background-size: cover;
-  background-color: black;
-  font-family: 'Paytone One', sans-serif;
-  color: white;
+  background-color: rgb(155, 0, 139);
+  font-family: 'Do Hyeon', sans-serif;
 }
 .container {
-  background-color: purple;
+  background-color: rgb(142, 243, 189);
   margin: 200px auto;
   width: 40%;
+  color: rgb(155, 0, 139);
 }
